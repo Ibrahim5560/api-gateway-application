@@ -18,6 +18,7 @@ logging:
     ROOT: DEBUG
     io.github.jhipster: DEBUG
     com.isoft.gatewayapp: DEBUG
+#    org.apache.http.wire: DEBUG
 
 eureka:
   instance:
@@ -45,8 +46,8 @@ spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:postgresql://localhost:5432/apiGatewayApplication
-    username: apiGatewayApplication
-    password:
+    username: postgres
+    password: admin
     hikari:
       poolName: Hikari
       auto-commit: false
@@ -112,8 +113,10 @@ jhipster:
     max-age: 1800
   security:
     client-authorization:
-      access-token-uri: http://../uaa/oauth/token
-      token-service-id: ../uaa
+      #      access-token-uri: http://../uaa/oauth/token
+      #      token-service-id: ../uaa
+      access-token-uri: http://uaaApplication/oauth/token
+      token-service-id: uaaApplication
       client-id: internal
       client-secret: internal
   mail: # specific JHipster mail property, for standard properties see MailProperties
@@ -133,7 +136,8 @@ jhipster:
     retention-period: 30 # Number of days before audit events are deleted.
 oauth2:
   signature-verification:
-    public-key-endpoint-uri: http://../uaa/oauth/token_key
+    #    public-key-endpoint-uri: http://../uaa/oauth/token_key
+    public-key-endpoint-uri: http://uaaApplication/oauth/token_key
     #ttl for public keys to verify JWT tokens (in ms)
     ttl: 3600000
     #max. rate at which public keys will be fetched (in ms)

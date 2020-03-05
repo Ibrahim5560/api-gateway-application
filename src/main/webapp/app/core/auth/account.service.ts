@@ -17,12 +17,16 @@ export class AccountService {
   constructor(private http: HttpClient, private stateStorageService: StateStorageService, private router: Router) {}
 
   save(account: Account): Observable<{}> {
-    return this.http.post(SERVER_API_URL + 'services/../uaa/api/account', account);
+    return this.http.post(SERVER_API_URL + 'services/uaaApplication/api/account', account);
+    // return this.http.post('http://uaaApplication/api/account', account);
   }
 
   authenticate(identity: Account | null): void {
     this.userIdentity = identity;
     this.authenticationState.next(this.userIdentity);
+
+    // eslint-disable-next-line no-console
+    console.log('Ibrahim ------------- this.userIdentity', this.userIdentity);
   }
 
   hasAnyAuthority(authorities: string[] | string): boolean {
@@ -43,7 +47,8 @@ export class AccountService {
         }),
         tap((account: Account | null) => {
           this.authenticate(account);
-
+          // eslint-disable-next-line no-console
+          console.log('Ibrahim ------------- account in identity', account);
           if (account) {
             this.navigateToStoredUrl();
           }
@@ -67,7 +72,8 @@ export class AccountService {
   }
 
   private fetch(): Observable<Account> {
-    return this.http.get<Account>(SERVER_API_URL + 'services/../uaa/api/account');
+    return this.http.get<Account>(SERVER_API_URL + 'services/uaaApplication/api/account');
+    // return this.http.get<Account>('http://uaaApplication/api/account');
   }
 
   private navigateToStoredUrl(): void {

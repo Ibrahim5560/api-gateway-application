@@ -8,7 +8,8 @@ import { IUser } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  public resourceUrl = SERVER_API_URL + 'services/../uaa/api/users';
+  public resourceUrl = SERVER_API_URL + 'services/uaaApplication/api/users';
+  // public resourceUrl = 'http://uaaApplication/api/users';
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +35,7 @@ export class UserService {
   }
 
   authorities(): Observable<string[]> {
-    return this.http.get<string[]>(SERVER_API_URL + 'services/../uaa/api/users/authorities');
+    return this.http.get<string[]>(SERVER_API_URL + 'services/uaaApplication/api/users/authorities');
+    // return this.http.get<string[]>('http://uaaApplication/api/users/authorities');
   }
 }

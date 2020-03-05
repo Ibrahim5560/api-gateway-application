@@ -58,7 +58,7 @@ public class OAuth2AuthenticationServiceTest {
     public void init() {
         oAuth2Properties = new OAuth2Properties();
         jHipsterProperties = new JHipsterProperties();
-        jHipsterProperties.getSecurity().getClientAuthorization().setAccessTokenUri("http://uaa/oauth/token");
+        jHipsterProperties.getSecurity().getClientAuthorization().setAccessTokenUri("http://uaaApplication/oauth/token");
         OAuth2CookieHelper cookieHelper = new OAuth2CookieHelper(oAuth2Properties);
         OAuth2AccessToken accessToken = createAccessToken(ACCESS_TOKEN_VALUE, REFRESH_TOKEN_VALUE);
 
@@ -97,7 +97,7 @@ public class OAuth2AuthenticationServiceTest {
         formParams.set("password", "user2");
         formParams.add("grant_type", "password");
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(formParams, reqHeaders);
-        when(restTemplate.postForEntity("http://uaa/oauth/token", entity, OAuth2AccessToken.class))
+        when(restTemplate.postForEntity("http://uaaApplication/oauth/token", entity, OAuth2AccessToken.class))
             .thenThrow(new HttpClientErrorException(HttpStatus.BAD_REQUEST));
     }
 
@@ -110,7 +110,7 @@ public class OAuth2AuthenticationServiceTest {
         formParams.set("password", "user");
         formParams.add("grant_type", "password");
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(formParams, reqHeaders);
-        when(restTemplate.postForEntity("http://uaa/oauth/token", entity, OAuth2AccessToken.class))
+        when(restTemplate.postForEntity("http://uaaApplication/oauth/token", entity, OAuth2AccessToken.class))
             .thenReturn(new ResponseEntity<OAuth2AccessToken>(accessToken, HttpStatus.OK));
     }
 
@@ -123,7 +123,7 @@ public class OAuth2AuthenticationServiceTest {
         headers.add("Authorization", CLIENT_AUTHORIZATION);
         HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
         OAuth2AccessToken newAccessToken = createAccessToken(NEW_ACCESS_TOKEN_VALUE, NEW_REFRESH_TOKEN_VALUE);
-        when(restTemplate.postForEntity("http://uaa/oauth/token", entity, OAuth2AccessToken.class))
+        when(restTemplate.postForEntity("http://uaaApplication/oauth/token", entity, OAuth2AccessToken.class))
             .thenReturn(new ResponseEntity<OAuth2AccessToken>(newAccessToken, HttpStatus.OK));
     }
 

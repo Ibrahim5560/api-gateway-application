@@ -18,6 +18,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => (this.account = account));
+
+    // eslint-disable-next-line no-console
+    console.log('this.account', this.account);
   }
 
   isAuthenticated(): boolean {

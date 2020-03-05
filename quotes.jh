@@ -1,0 +1,12 @@
+entity Quote {
+	Quote String required unique,
+	price BigDecimal required,
+	lastQuote ZonedDateTime required
+}
+
+dto Quote with mapstruct
+paginate Quote with pagination
+service Quote with serviceImpl
+// microservice Quote with Quotes
+filter Quote
+clientRootFolder Quote with Quotes
