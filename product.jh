@@ -1,0 +1,13 @@
+// JDL definition for application 'Products' generated with command 'jhipster export-jdl'
+
+entity Product {
+  name String required unique,
+  price BigDecimal required,
+  description String
+}
+dto Product with mapstruct
+paginate Product with pagination
+service Product with serviceImpl
+microservice Product with quizMasterService
+filter Product
+clientRootFolder Product with quizMasterService
